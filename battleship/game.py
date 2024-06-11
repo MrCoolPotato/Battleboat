@@ -18,9 +18,11 @@ class Game:
 
     def setup_board(self, board, ships):
         for ship in ships:
-            x, y = random.randint(0, board.size - 1), random.randint(0, board.size - 1)
-            orientation = random.choice(["H", "V"])
-            board.place_ship(ship, x, y, orientation)
+            placed = False
+            while not placed:
+                x, y = random.randint(0, board.size - 1), random.randint(0, board.size - 1)
+                orientation = random.choice(["H", "V"])
+                placed = board.place_ship(ship, x, y, orientation)
 
     def play(self):
         running = True
@@ -35,4 +37,29 @@ class Game:
                     if row < self.board.size and col < self.board.size:
                         if self.ai_board.receive_attack(row, col):
                             print("Hit!")
-                       
+                        else:
+                            print("Miss!")
+                        if self.check_winner(self.ai_board):
+                            print("You win!")
+                            running = False
+                            
+                        x, y = random.randint(0, self.board.size - 1), random.randint(0, self.board.size - 1)
+                        if self.board.receive_attack(x, y):
+                            print("AI hit your ship!")
+                        else:
+                            print("AI missed!")
+
+                        if self.check_winner(self.board):
+                            print("AI wins!")
+                            running = False
+
+            self.board.draw()
+            pygame.display.flip()
+
+        pygame.quit()
+
+    def check_winner(self, board):
+        for row in board.grid:
+            if any(cell in ["R", "S"] for cell in row):
+                return False
+        return True

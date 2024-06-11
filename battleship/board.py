@@ -24,11 +24,16 @@ class Board:
 
     def place_ship(self, ship, x, y, orientation):
         if orientation == "H":
+            if y + ship.size > self.size:
+                return False  
             for i in range(ship.size):
                 self.grid[x][y + i] = ship.symbol
         else:
+            if x + ship.size > self.size:
+                return False  
             for i in range(ship.size):
                 self.grid[x + i][y] = ship.symbol
+        return True
 
     def receive_attack(self, x, y):
         if self.grid[x][y] != "~":
