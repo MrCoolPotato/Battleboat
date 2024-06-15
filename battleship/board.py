@@ -13,8 +13,8 @@ class Board:
                 color = (0, 0, 255) if self.grid[row][col] == "~" else (255, 0, 0) if self.grid[row][col] == "X" else (0, 255, 0) if self.grid[row][col] == "O" else (0, 0, 0)
                 pygame.draw.rect(screen,
                                  color,
-                                 [(self.margin + self.cell_size) * col + self.margin + offset_x,
-                                  (self.margin + self.cell_size) * row + self.margin + offset_y,
+                                 [offset_x + (self.margin + self.cell_size) * col + self.margin,
+                                  offset_y + (self.margin + self.cell_size) * row + self.margin,
                                   self.cell_size,
                                   self.cell_size])
 

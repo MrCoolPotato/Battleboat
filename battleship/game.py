@@ -6,7 +6,7 @@ import random
 class Game:
     def __init__(self):
         pygame.init()
-        self.screen = pygame.display.set_mode((900, 600))
+        self.screen = pygame.display.set_mode((1000, 600))
         pygame.display.set_caption("Battleship Game")
         self.player_board = Board()
         self.ai_board = Board()
@@ -37,19 +37,20 @@ class Game:
                     running = False
                 elif event.type == pygame.MOUSEBUTTONDOWN and player_turn:
                     x, y = pygame.mouse.get_pos()
-                    row = (y - 50) // (self.player_board.cell_size + self.player_board.margin)
-                    col = (x - 450) // (self.player_board.cell_size + self.player_board.margin)
-                    if 0 <= row < self.player_board.size and 0 <= col < self.player_board.size:
-                        result = self.ai_board.receive_attack(row, col)
-                        if result is not None:
-                            player_turn = False
-                            if result:
-                                print("Hit!")
-                            else:
-                                print("Miss!")
-                            if self.check_winner(self.ai_board):
-                                print("You win!")
-                                running = False
+                    if 500 <= x <= 500 + self.ai_board.size * (self.ai_board.cell_size + self.ai_board.margin) and 100 <= y <= 100 + self.ai_board.size * (self.ai_board.cell_size + self.ai_board.margin): 
+                        col = (x - 500) // (self.ai_board.cell_size + self.ai_board.margin)
+                        row = (y - 100) // (self.ai_board.cell_size + self.ai_board.margin)
+                        if 0 <= row < self.ai_board.size and 0 <= col < self.ai_board.size:
+                            result = self.ai_board.receive_attack(row, col)
+                            if result is not None:
+                                player_turn = False
+                                if result:
+                                    print("Hit!")
+                                else:
+                                    print("Miss!")
+                                if self.check_winner(self.ai_board):
+                                    print("You win!")
+                                    running = False
 
             if not player_turn:
                 self.ai_turn()
@@ -113,4 +114,3 @@ class Game:
         self.ai_board.draw(self.screen, offset_x=500, offset_y=100)
         ai_label = self.font.render("AI Board", True, (0, 0, 0))
         self.screen.blit(ai_label, (500, 50))
-
