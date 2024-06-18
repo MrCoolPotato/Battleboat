@@ -26,7 +26,9 @@ class Game:
             while not placed:
                 x, y = random.randint(0, board.size - 1), random.randint(0, board.size - 1)
                 orientation = random.choice(["H", "V"])
-                placed = board.place_ship(ship, x, y, orientation)
+                if board.can_place_ship(ship, x, y, orientation):
+                    board.place_ship(ship, x, y, orientation)
+                    placed = True
 
     def play(self):
         running = True
@@ -37,7 +39,7 @@ class Game:
                     running = False
                 elif event.type == pygame.MOUSEBUTTONDOWN and player_turn:
                     x, y = pygame.mouse.get_pos()
-                    if 500 <= x <= 900 and 100 <= y <= 500:  # Check if the click is within the AI board area
+                    if 500 <= x <= 500 + self.ai_board.size * (self.ai_board.cell_size + self.ai_board.margin) and 100 <= y <= 100 + self.ai_board.size * (self.ai_board.cell_size + self.ai_board.margin):  # Check if the click is within the AI board area
                         col = (x - 500) // (self.ai_board.cell_size + self.ai_board.margin)
                         row = (y - 100) // (self.ai_board.cell_size + self.ai_board.margin)
                         if 0 <= row < self.ai_board.size and 0 <= col < self.ai_board.size:
@@ -105,12 +107,12 @@ class Game:
         return True
 
     def draw_boards(self):
-        # Draw player board
+        
         self.player_board.draw(self.screen, offset_x=50, offset_y=100)
         player_label = self.font.render("Player Board", True, (0, 0, 0))
         self.screen.blit(player_label, (50, 50))
 
-        # Draw AI board
+        
         self.ai_board.draw(self.screen, offset_x=500, offset_y=100)
         ai_label = self.font.render("AI Board", True, (0, 0, 0))
         self.screen.blit(ai_label, (500, 50))

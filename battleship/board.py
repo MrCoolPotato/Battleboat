@@ -18,15 +18,26 @@ class Board:
                                   self.cell_size,
                                   self.cell_size])
 
-    def place_ship(self, ship, x, y, orientation):
+    def can_place_ship(self, ship, x, y, orientation):
         if orientation == "H":
             if y + ship.size > self.size:
-                return False  # Ship can't be placed horizontally here
+                return False
+            for i in range(ship.size):
+                if self.grid[x][y + i] != "~":
+                    return False
+        else:
+            if x + ship.size > self.size:
+                return False
+            for i in range(ship.size):
+                if self.grid[x + i][y] != "~":
+                    return False
+        return True
+
+    def place_ship(self, ship, x, y, orientation):
+        if orientation == "H":
             for i in range(ship.size):
                 self.grid[x][y + i] = ship.symbol
         else:
-            if x + ship.size > self.size:
-                return False  # Ship can't be placed vertically here
             for i in range(ship.size):
                 self.grid[x + i][y] = ship.symbol
         return True
@@ -38,4 +49,4 @@ class Board:
         elif self.grid[x][y] == "~":
             self.grid[x][y] = "O"
             return False
-        return None  # Already attacked here
+        return None  
