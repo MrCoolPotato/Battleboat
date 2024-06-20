@@ -4,12 +4,12 @@ from battleship.ship import ships
 import random
 
 class Game:
-    def __init__(self):
+    def __init__(self, show_enemy_ships=True):
         pygame.init()
         self.screen = pygame.display.set_mode((1000, 600))
         pygame.display.set_caption("Battleship Game")
         self.player_board = Board()
-        self.ai_board = Board()
+        self.ai_board = Board(show_ships=show_enemy_ships)
         self.ships = ships
         self.ai_ships = ships
         self.ai_hits = []
@@ -39,7 +39,7 @@ class Game:
                     running = False
                 elif event.type == pygame.MOUSEBUTTONDOWN and player_turn:
                     x, y = pygame.mouse.get_pos()
-                    if 500 <= x <= 500 + self.ai_board.size * (self.ai_board.cell_size + self.ai_board.margin) and 100 <= y <= 100 + self.ai_board.size * (self.ai_board.cell_size + self.ai_board.margin):  # Check if the click is within the AI board area
+                    if 500 <= x <= 500 + self.ai_board.size * (self.ai_board.cell_size + self.ai_board.margin) and 100 <= y <= 100 + self.ai_board.size * (self.ai_board.cell_size + self.ai_board.margin):  
                         col = (x - 500) // (self.ai_board.cell_size + self.ai_board.margin)
                         row = (y - 100) // (self.ai_board.cell_size + self.ai_board.margin)
                         if 0 <= row < self.ai_board.size and 0 <= col < self.ai_board.size:
@@ -102,7 +102,7 @@ class Game:
 
     def check_winner(self, board):
         for row in board.grid:
-            if any(cell in ["R", "S", "C"] for cell in row):
+            if any(cell in ["R", "S", "C"] for cell in row):  
                 return False
         return True
 

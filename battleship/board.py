@@ -1,16 +1,25 @@
 import pygame
 
 class Board:
-    def __init__(self, size=10):
+    def __init__(self, size=10, show_ships=True):
         self.size = size
         self.grid = [["~" for _ in range(size)] for _ in range(size)]
         self.cell_size = 40
         self.margin = 5
+        self.show_ships = show_ships
 
     def draw(self, screen, offset_x=0, offset_y=0):
         for row in range(self.size):
             for col in range(self.size):
-                color = (0, 0, 255) if self.grid[row][col] == "~" else (255, 0, 0) if self.grid[row][col] == "X" else (0, 255, 0) if self.grid[row][col] == "O" else (0, 0, 0)
+                cell = self.grid[row][col]
+                if cell == "~":
+                    color = (0, 0, 255)
+                elif cell == "X":
+                    color = (255, 0, 0)
+                elif cell == "O":
+                    color = (0, 255, 0)
+                else:
+                    color = (0, 0, 0) if self.show_ships else (0, 0, 255)
                 pygame.draw.rect(screen,
                                  color,
                                  [offset_x + (self.margin + self.cell_size) * col + self.margin,
@@ -49,4 +58,4 @@ class Board:
         elif self.grid[x][y] == "~":
             self.grid[x][y] = "O"
             return False
-        return None  
+        return None  # Already attacked here
