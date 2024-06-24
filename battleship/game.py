@@ -6,7 +6,7 @@ import random
 class Game:
     def __init__(self, show_enemy_ships=True):
         pygame.init()
-        self.screen = pygame.display.set_mode((1100, 600))  # Increased width to account for the gap
+        self.screen = pygame.display.set_mode((1100, 600))  
         pygame.display.set_caption("Battleship Game")
         self.player_board = Board()
         self.ai_board = Board(show_ships=show_enemy_ships)
@@ -44,7 +44,7 @@ class Game:
                     cell_size_with_margin = self.ai_board.cell_size + self.ai_board.margin
                     board_x_end = board_x_start + self.ai_board.size * cell_size_with_margin
                     board_y_end = board_y_start + self.ai_board.size * cell_size_with_margin
-                    if board_x_start <= x < board_x_end and board_y_start <= y < board_y_end:  # Check if the click is within the AI board area
+                    if board_x_start <= x < board_x_end and board_y_start <= y < board_y_end: 
                         col = (x - board_x_start) // cell_size_with_margin
                         row = (y - board_y_start) // cell_size_with_margin
                         if 0 <= row < self.ai_board.size and 0 <= col < self.ai_board.size:
@@ -107,17 +107,17 @@ class Game:
 
     def check_winner(self, board):
         for row in board.grid:
-            if any(cell in ["R", "S", "C"] for cell in row):  # Include "C" in the check
+            if any(cell in ["R", "S", "C"] for cell in row):  
                 return False
         return True
 
     def draw_boards(self):
-        # Draw player board
+       
         self.player_board.draw(self.screen, offset_x=50, offset_y=100)
         player_label = self.font.render("Player Board", True, (0, 0, 0))
         self.screen.blit(player_label, (50, 50))
 
-        # Draw AI board with a gap
+        
         self.ai_board.draw(self.screen, offset_x=550, offset_y=100)
         ai_label = self.font.render("AI Board", True, (0, 0, 0))
         self.screen.blit(ai_label, (550, 50))
