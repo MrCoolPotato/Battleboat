@@ -6,7 +6,7 @@ import random
 class Game:
     def __init__(self, show_enemy_ships=True):
         pygame.init()
-        self.screen = pygame.display.set_mode((1000, 600))
+        self.screen = pygame.display.set_mode((1100, 600))  # Increased width to account for the gap
         pygame.display.set_caption("Battleship Game")
         self.player_board = Board()
         self.ai_board = Board(show_ships=show_enemy_ships)
@@ -39,9 +39,14 @@ class Game:
                     running = False
                 elif event.type == pygame.MOUSEBUTTONDOWN and player_turn:
                     x, y = pygame.mouse.get_pos()
-                    if 500 <= x <= 500 + self.ai_board.size * (self.ai_board.cell_size + self.ai_board.margin) and 100 <= y <= 100 + self.ai_board.size * (self.ai_board.cell_size + self.ai_board.margin):  
-                        col = (x - 500) // (self.ai_board.cell_size + self.ai_board.margin)
-                        row = (y - 100) // (self.ai_board.cell_size + self.ai_board.margin)
+                    board_x_start = 550
+                    board_y_start = 100
+                    cell_size_with_margin = self.ai_board.cell_size + self.ai_board.margin
+                    board_x_end = board_x_start + self.ai_board.size * cell_size_with_margin
+                    board_y_end = board_y_start + self.ai_board.size * cell_size_with_margin
+                    if board_x_start <= x < board_x_end and board_y_start <= y < board_y_end:  # Check if the click is within the AI board area
+                        col = (x - board_x_start) // cell_size_with_margin
+                        row = (y - board_y_start) // cell_size_with_margin
                         if 0 <= row < self.ai_board.size and 0 <= col < self.ai_board.size:
                             result = self.ai_board.receive_attack(row, col)
                             if result is not None:
@@ -102,17 +107,17 @@ class Game:
 
     def check_winner(self, board):
         for row in board.grid:
-            if any(cell in ["R", "S", "C"] for cell in row):  
+            if any(cell in ["R", "S", "C"] for cell in row):  # Include "C" in the check
                 return False
         return True
 
     def draw_boards(self):
-        
+        # Draw player board
         self.player_board.draw(self.screen, offset_x=50, offset_y=100)
         player_label = self.font.render("Player Board", True, (0, 0, 0))
         self.screen.blit(player_label, (50, 50))
 
-        
-        self.ai_board.draw(self.screen, offset_x=500, offset_y=100)
+        # Draw AI board with a gap
+        self.ai_board.draw(self.screen, offset_x=550, offset_y=100)
         ai_label = self.font.render("AI Board", True, (0, 0, 0))
-        self.screen.blit(ai_label, (500, 50))
+        self.screen.blit(ai_label, (550, 50))
