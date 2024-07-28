@@ -1,4 +1,4 @@
-# Battleship Game
+# Battleship style Game
 
 Welcome to the Battleship Game! This is a single-player version of the classic board game where you can play against an AI. The game is developed using Python and Pygame.
 
