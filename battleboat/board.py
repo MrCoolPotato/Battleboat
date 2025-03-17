@@ -58,4 +58,4 @@ class Board:
         elif self.grid[x][y] == "~":
             self.grid[x][y] = "O"
             return False
-        return None  # Already attacked here
+        return None
