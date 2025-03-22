@@ -1,1 +1,4 @@
-battleship/__pycache__/
+battleboat/__pycache__/
+setup.py
+dist/
+build/
