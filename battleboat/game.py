@@ -6,7 +6,7 @@ import random
 class Game:
     def __init__(self, show_enemy_ships=False):
         pygame.init()
-        self.screen = pygame.display.set_mode((1100, 600))
+        self.screen = pygame.display.set_mode((1050, 600))
         pygame.display.set_caption("Battleboat")
         self.player_board = Board()
         self.ai_board = Board(show_ships=show_enemy_ships)
@@ -147,7 +147,8 @@ class Game:
             self.draw_boards()
     
             backdrop_rect = text_rect.inflate(20, 20)
-            pygame.draw.rect(self.screen, (255, 255, 255), backdrop_rect)
+            pygame.draw.rect(self.screen, (255, 255, 255), backdrop_rect, border_radius=10)
+            pygame.draw.rect(self.screen, (0, 0, 0), backdrop_rect, width=2, border_radius=10)
             self.screen.blit(text_surface, text_rect)
             pygame.display.flip()
     
