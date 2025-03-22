@@ -174,5 +174,5 @@ class Game:
         self.screen.blit(player_label, (50, 50))
 
         self.ai_board.draw(self.screen, offset_x=550, offset_y=100)
-        ai_label = self.font.render("AI Board", True, (0, 0, 0))
+        ai_label = self.font.render("CPU Board", True, (0, 0, 0))
         self.screen.blit(ai_label, (550, 50))
