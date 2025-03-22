@@ -2,3 +2,5 @@ battleboat/__pycache__/
 setup.py
 dist/
 build/
+dev_build/
+main.egg-info/
