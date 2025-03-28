@@ -2,11 +2,15 @@ import pygame
 from battleboat.board import Board
 from battleboat.ship import ships
 import random
+from AppKit import NSApplication, NSImage
 
 class Game:
     def __init__(self, show_enemy_ships=False):
         pygame.init()
         self.screen = pygame.display.set_mode((1050, 600))
+        app = NSApplication.sharedApplication()
+        icon = NSImage.alloc().initWithContentsOfFile_("battleboat_logo.icns")
+        app.setApplicationIconImage_(icon)
         pygame.display.set_caption("Battleboat")
         self.player_board = Board()
         self.ai_board = Board(show_ships=show_enemy_ships)
