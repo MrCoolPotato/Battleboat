@@ -4,3 +4,4 @@ dist/
 build/
 dev_build/
 main.egg-info/
+main.spec

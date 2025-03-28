@@ -6,6 +6,8 @@ import random
 class Game:
     def __init__(self, show_enemy_ships=False):
         pygame.init()
+        icon_surface = pygame.image.load("battleboat_logo_raw.png")
+        pygame.display.set_icon(icon_surface)
         self.screen = pygame.display.set_mode((1050, 600))
         pygame.display.set_caption("Battleboat")
         self.player_board = Board()
