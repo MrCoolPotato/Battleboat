@@ -1,6 +1,6 @@
-# Battleship style Game
+# Battleboat
 
-Welcome to the Battleship Game! This is a single-player version of the classic board game where you can play against an AI. The game is developed using Python and Pygame.
+Welcome to the Battleboat! This is a single-player version of the classic board game where you can play against an AI. The game is developed using Python and Pygame.
 
 ## Features
 
@@ -15,8 +15,8 @@ Welcome to the Battleship Game! This is a single-player version of the classic b
 1. **Clone the repository:**
 
    ```sh
-   git clone https://github.com/yourusername/battleship-game.git
-   cd battleship-game
+   git clone https://github.com/yourusername/Battleboat-game.git
+   cd Battleboat
    ```
 
 2. **Create a virtual environment (optional but recommended):**
@@ -49,11 +49,11 @@ Welcome to the Battleship Game! This is a single-player version of the classic b
 ### Project Structure
 
 ```
-battleship_game/
+Battleboat_game/
 ├── README.md
 ├── requirements.txt
 ├── main.py
-├── battleship/
+├── Battleboat/
 │   ├── __init__.py
 │   ├── board.py
 │   ├── ship.py
@@ -68,18 +68,18 @@ battleship_game/
 │   ├── test_player.py
 │   ├── test_utils.py
 └── assets/
-    ├── battleship_icon.png
+    ├── Battleboat_icon.png
     └── other_assets/
 ```
 
 ### Important Files
 
 - **main.py:** Entry point for the game.
-- **battleship/board.py:** Contains the Board class to manage the game board.
-- **battleship/ship.py:** Contains the Ship class to manage ships.
-- **battleship/game.py:** Contains the Game class to manage the game logic.
-- **battleship/player.py:** Contains the Player class to manage player actions.
-- **battleship/utils.py:** Contains utility functions used across the game.
+- **Battleboat/board.py:** Contains the Board class to manage the game board.
+- **Battleboat/ship.py:** Contains the Ship class to manage ships.
+- **Battleboat/game.py:** Contains the Game class to manage the game logic.
+- **Battleboat/player.py:** Contains the Player class to manage player actions.
+- **Battleboat/utils.py:** Contains utility functions used across the game.
 
 ## Configuration
 
@@ -87,7 +87,7 @@ You can toggle the visibility of enemy ships by changing the `show_enemy_ships` 
 
 ```python
 # main.py
-from battleship.game import Game
+from Battleboat.game import Game
 
 if __name__ == "__main__":
     game = Game(show_enemy_ships=True)  # Set to False for production
