@@ -68,8 +68,7 @@ Battleboat_game/
 │   ├── test_player.py
 │   ├── test_utils.py
 └── assets/
-    ├── Battleboat_icon.png
-    └── other_assets/
+    └── Battleboat_icon.png
 ```
 
 ### Important Files
